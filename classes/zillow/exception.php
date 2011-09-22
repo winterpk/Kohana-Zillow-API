@@ -1,3 +1,3 @@
 <?php defined('SYSPATH') or die('No direct access');
 
-class Killow_Exception extends Kohana_Exception { }
+class Zillow_Exception extends Kohana_Exception { }
