@@ -14,18 +14,19 @@ abstract class Zillow_Core
      */
     public $zws_id;
 	
+	
 	/**
      * Class Constructor
      */
-    public function __construct()
+    public function __construct ()
     {
-        $this->zws_id = Kohana::$config->load('zillow.zws_id');
+        $this->zws_id = Kohana::config('zillow')->zws_id;
     }
 	
 	/**
 	 * Factory - method loads a new Zillow object
 	 */	
-	public static function factory()
+	public static function factory ()
 	{
 		return new Zillow;
 	}	
@@ -34,9 +35,9 @@ abstract class Zillow_Core
      * Creates (if not already created) and returns a Zillow_Transporter object
      * @return 	Zillow_Transporter
      */
-    public function create_transporter()
+    public function create_transporter ()
     {
-        if ( isset($this->_transporter) === FALSE )
+        if ( FALSE === isset($this->_transporter) )
             $this->_transporter = new Zillow_Transporter;
 
         return $this->_transporter;
@@ -52,7 +53,7 @@ abstract class Zillow_Core
      * @link	http://www.zillow.com/webservice/GetSearchResults.htm
      * @throws	Zillow_Exception
      */
-    public function get_search_results($address = NULL, $csz = NULL)
+    public function get_search_results ( $address = NULL, $csz = NULL )
     {
     	$uri = 'http://www.zillow.com/webservice/GetSearchResults.htm';
 		$trans = $this->create_transporter();
@@ -75,13 +76,12 @@ abstract class Zillow_Core
 	/**
      * Gets the Zestimate for a specific zillow property ID (zpid)
 	 * 
-     * @param	string	$address	Street Address
-	 * @param	stirng	$csz		City State Zip
+     * @param	string	$zpid
      * @return	object	xml
      * @link	http://www.zillow.com/webservice/GetZestimate.htm
      * @throws	Zillow_Exception
      */
-    public function get_zestimate($address = NULL, $csz = NULL)
+    public function get_zestimate ( $address = NULL, $csz = NULL )
     {
     	$uri = 'http://www.zillow.com/webservice/GetSearchResults.htm';
 		$trans = $this->create_transporter();
