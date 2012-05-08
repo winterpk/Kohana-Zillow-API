@@ -19,7 +19,7 @@ abstract class Zillow_Core
      */
     public function __construct()
     {
-        $this->zws_id = Kohana::config('zillow')->zws_id;
+        $this->zws_id = Kohana::$config->load('zillow.zws_id');
     }
 	
 	/**
